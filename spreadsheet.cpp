@@ -6,13 +6,44 @@
 
 Spreadsheet::~Spreadsheet()
 {
-    delete select;
+    this->clear();
 }
 
 void Spreadsheet::set_selection(Select* new_select)
 {
     delete select;
     select = new_select;
+}
+
+void Spreadsheet::print_selection(std::ostream& out) const
+{
+    if(this->select == nullptr)
+    {
+	for(unsigned int row = 0; row < data.size(); row++)
+	{
+		for(unsigned int col = 0; col < data.at(row).size(); col++)
+		{
+			out << cell_data(row, col) << "\t";
+		}
+		out << "\n";
+	}
+    }
+    
+    else
+    {
+	for(unsigned int row = 0; row < data.size(); row++)
+	{
+		for(unsigned int col = 0; col < data.at(row).size(); col++)
+		{
+			if(this->select->select(this, row))
+			{
+				out << cell_data(row, col) << "\t";
+			}
+		}
+		if(this->select->select(this,row))
+			out << "\n";
+	}
+    }
 }
 
 void Spreadsheet::clear()
