@@ -58,7 +58,15 @@ void Spreadsheet::clear()
 
 void Spreadsheet::set_column_names(const std::vector<std::string>& names)
 {
-    column_names=names;
+    for(unsigned int i = 0; i < column_names.size(); i++){
+		for (unsigned int j = 0; j < names.size(); j++){	
+			if(names.at(j) == column_names.at(i)){
+			std::cerr << "Error: Column Already Exists" << std::endl;
+			exit(1);
+		}
+ 	}
+    }
+	column_names = names;
 }
 
 void Spreadsheet::add_row(const std::vector<std::string>& row_data)
