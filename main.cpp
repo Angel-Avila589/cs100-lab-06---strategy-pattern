@@ -1,6 +1,9 @@
 #include "spreadsheet.hpp"
 #include "select.hpp"
-
+#include "select_contains.hpp"
+#include "select_not.hpp"
+#include "select_and.hpp"
+#include "select_or.hpp"
 #include <iostream>
 
 int main(int argc, char* argv[])
@@ -36,6 +39,7 @@ int main(int argc, char* argv[])
     std::cout << std::endl;
 
     // Sample usage 3
+
        sheet.set_selection(
          new Select_Or(
              new Select_Contains(&sheet,"First","Amanda"),
