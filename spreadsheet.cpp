@@ -15,6 +15,25 @@ void Spreadsheet::set_selection(Select* new_select)
     select = new_select;
 }
 
+void Spreadsheet::print_selection(std::ostream& out) const
+{
+	for(unsigned int i = 0; i < unsigned(column_names.size()); i++)
+	{
+		out << column_names.at(i) << "\t";
+	}
+	out << "\n";
+	if(this->select == nullptr){
+		for(unsigned int row = 0; row < data.size(); row++)
+		{
+			for(unsigned int col = 0; col < data.at(row).size(); col++)
+			{
+				out << cell_data(row, col) << "\t";
+			}
+			out << "\n";
+		}
+	}
+}
+
 void Spreadsheet::clear()
 {
     column_names.clear();
